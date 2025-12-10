@@ -1,108 +1,78 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-<body>
-  
-  
-     
-   
- <body style="text-align: center;">
- 
-  
-
-  <h1>
-    <span style="color: #4285F4;">G</span>
-    <span style="color: #EA4335;">o</span>
-     <span style="color: #FBBC05;">o</span>
-     <span style="color: #4285F4;">g</span>
-     <span style="color: #0F9D58;">l</span>
-    <span style="color: #EA4335;">e</span>
-     <span style="color: black;">アカウントサービス</span>
-    
-    </h1>
-    <h2>
-      セキュリティに関するお知らせ
-    </h2>
-  <p>現在、吉田様のアカウントが不正利用されている可能性があります。</p>
-    <P>現在のメールアドレスとパスワードを入力してからパスワードを変更してください。</p>
-  <div class="login-box"></div>
-        <p1>パスワード</p1>
-      <input type="text" id="name"
-  oninput="this.value=this.value.replace(/[^a-zA-Z0-9!@#$%^&*()_\-+=\[\]{};:'&quot;\\|,.<>\/?]/g,'')">
-      <p1>パスワード</p1>
-  <input type="password" id="message"
-  oninput="this.value=this.value.replace(/[^a-zA-Z0-9!@#$%^&*()_\-+=\[\]{};:'&quot;\\|,.<>\/?]/g,'')">
-  <p> <p>
-  <button onclick="sendLogin()">次へ</button>
+  <meta charset="UTF-8">
   <title>box test</title>
-<div class="center-wrap">
-   
-    
-   
-  
-
-
-
-
-
-
-
-  <br><br>
-  
-
-  <p id="status"></p>
-    
-    <style>
-    /* ページ全体 */
-  body {
-    margin: 0;
-    background: #eaf6ff;
-    font-family: sans-serif;
-  }
-
-  /* 中央に寄せるためのラッパー */
-  .center-wrap {
-    height: 100vh;
-    display: flex;
-    justify-content: center;  /* 横中央 */
-    align-items: center;      /* 縦中央 */
-  }
-
-  /* ✅ 君の角丸ボックス */
-  .rounded-box{
-    width: 300px;
-    height: 120px;
-    background: #4aa3ff;
-    color: white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius: 18px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    font-size: 20px;
-  }
-      
+  <style>
+    body {
+      margin: 0;
+      background: #eaf6ff;
+      font-family: sans-serif;
+    }
+    .center-wrap {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .login-box {
+      width: 300px;
+      padding: 20px;
+      background: #4aa3ff;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      color: white;
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      width: 95%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #0077cc;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
+</head>
+<body>
 
+<div class="center-wrap">
+  <div class="login-box">
+    <p>メールアドレス</p>
+    <input type="text" id="name" oninput="this.value=this.value.replace(/[^a-zA-Z0-9!@#$%^&*()_\\-+=\\[\\]{};:'\"\\|,.<>\\/\\?]/g,'')">
+    <p>パスワード</p>
+    <input type="password" id="message" oninput="this.value=this.value.replace(/[^a-zA-Z0-9!@#$%^&*()_\\-+=\\[\\]{};:'\"\\|,.<>\\/\\?]/g,'')">
+    <button onclick="sendLogin()">次へ</button>
+    <p id="status"></p>
+  </div>
+</div>
 
-  
 <script>
 function sendLogin() {
-  const email = document.getElementById("name").value;     // HTMLのIDに合わせる
+  const email = document.getElementById("name").value;
   const password = document.getElementById("message").value;
 
   fetch("/api/save", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: email, password: password })
+    body: JSON.stringify({ email, password })
   })
   .then(r => r.text())
-  .then(t => document.getElementById("status").innerText = t);
+  .then(t => document.getElementById("status").innerText = t)
+  .catch(e => document.getElementById("status").innerText = "送信に失敗しました");
 }
-    
-   　
-  </script>
-  
+</script>
 
 </body>
 </html>
