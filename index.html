@@ -1,0 +1,16 @@
+<input id="name" placeholder="名前を入力">
+<button onclick="send()">送信</button>
+<p id="result"></p>
+
+<script>
+function send() {
+  const name = document.getElementById("name").value;
+  fetch("/api/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: name })
+  })
+  .then(r => r.text())
+  .then(t => document.getElementById("result").innerText = t);
+}
+</script>
