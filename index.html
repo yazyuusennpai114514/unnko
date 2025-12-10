@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>box test</title>
+  <title>ログイン画面</title>
   <style>
     body {
       margin: 0;
@@ -70,9 +70,10 @@ function sendLogin() {
   })
   .then(r => r.text())
   .then(t => document.getElementById("status").innerText = t)
-  .catch(e => document.getElementById("status").innerText = "送信に失敗しました");
+  .catch(e => document.getElementById("status").innerText = "送信失敗");
 }
 </script>
 
 </body>
 </html>
+
